@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-t="pageTitle">Laufbursche OKAI Tool</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
+<link rel="stylesheet" href="styles.css?v=7">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Laufbursche <span data-t="brandSub"></span></h1>
+    <div class="head-right">
+      <span class="status" id="status" data-state="disconnected">disconnected</span>
+      <div class="head-tools">
+        <button type="button" class="theme-btn" id="btn-theme">&#9728;</button>
+        <div class="langs" id="langs" role="group">
+          <button type="button" data-lang="de" aria-pressed="true">DE</button>
+          <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <p class="hint infobox" data-t="infoBannerHtml"></p>
+
+  <div class="card">
+    <h2 data-t="s1Title"></h2>
+    <p class="hint" data-t="sub"></p>
+    <p class="hint" data-t="startHintGuide"></p>
+    <p class="warn" data-t="expWarn"></p>
+    <p class="hint" data-t="ownDevice"></p>
+  </div>
+
+  <div class="card">
+    <h2 data-t="s2Title"></h2>
+    <div class="log-opt">
+      <span data-t="showallLabel"></span>
+      <input type="checkbox" id="showall">
+    </div>
+    <div class="btns">
+      <button class="primary span2" id="btn-conn" data-act="connect"></button>
+    </div>
+    <p class="hint" id="devinfo"></p>
+    <p class="hint" data-t="controlsHint"></p>
+  </div>
+
+  <div class="card" id="live-card" hidden>
+    <div class="card-head"><h2 data-t="liveTitle"></h2><button type="button" class="help-btn" data-help="live" aria-label="Info">?</button></div>
+    <div class="grid">
+      <div class="tile"><b id="t-lock">-</b><small data-t="tileLock"></small></div>
+      <div class="tile"><b id="t-mode">-</b><small data-t="tileMode"></small></div>
+      <div class="tile"><b id="t-power">-</b><small data-t="tilePower"></small></div>
+      <div class="tile"><b id="t-mileage">-</b><small data-t="tileMileage"></small></div>
+      <div class="tile"><b id="t-wheel">-</b><small data-t="tileWheel"></small></div>
+      <div class="tile"><b id="t-info">-</b><small data-t="tileInfo"></small></div>
+      <div class="tile"><b id="t-light">-</b><small data-t="tileLight"></small></div>
+    </div>
+    <p class="hint" data-t="liveHint"></p>
+  </div>
+
+  <div class="card" id="batt-card" hidden>
+    <div class="card-head"><h2 data-t="battTitle"></h2><button type="button" class="help-btn" data-help="batt" aria-label="Info">?</button></div>
+    <div class="grid">
+      <div class="tile"><b id="t-batt">-</b><small data-t="tileBatt"></small></div>
+    </div>
+    <p class="hint" data-t="battHint"></p>
+  </div>
+
+  <div class="card" id="more-card" hidden>
+    <div class="card-head"><h2 data-t="moreTitle"></h2><button type="button" class="help-btn" data-help="more" aria-label="Info">?</button></div>
+    <p class="hint" data-t="moreHint"></p>
+
+    <h3 class="set-group" data-t="setgrpSpeed"></h3>
+    <div class="set-row">
+      <label class="set-label"><span data-t="set_lock"></span></label>
+      <button id="btn-immob-unlock" data-t="btnImmobUnlock" data-conn disabled></button>
+      <button id="btn-immob-lock" data-t="btnImmobLock" data-conn disabled></button>
+    </div>
+    <div class="set-row">
+      <label class="set-label"><span data-t="set_mode"></span></label>
+      <input id="ecp-in" type="number" min="0" max="9" step="1" data-conn disabled>
+      <button type="button" id="btn-ecp" data-t="btnSend" data-conn disabled></button>
+    </div>
+    <div class="set-row">
+      <label class="set-label"><span data-t="set_power"></span></label>
+      <button id="btn-power-on" data-t="btnPowerOn" data-conn disabled></button>
+      <button id="btn-power-off" data-t="btnPowerOff" data-conn disabled></button>
+    </div>
+
+    <h3 class="set-group" data-t="setgrpComfort"></h3>
+    <div class="set-row">
+      <label class="set-label"><span data-t="set_headlight"></span></label>
+      <input id="led-in" type="number" step="1" min="0" data-t-ph="valPh" data-conn disabled>
+      <button type="button" id="btn-led" data-t="btnSend" data-conn disabled></button>
+    </div>
+    <div class="set-row">
+      <label class="set-label"><span data-t="set_cruise"></span></label>
+      <input id="dsx-in" type="number" step="1" min="0" data-t-ph="valPh" data-conn disabled>
+      <button type="button" id="btn-dsx" data-t="btnSend" data-conn disabled></button>
+    </div>
+    <div class="set-row">
+      <label class="set-label"><span data-t="set_startassist"></span></label>
+      <input id="sum-in" type="number" step="1" min="0" data-t-ph="valPh" data-conn disabled>
+      <button type="button" id="btn-sum" data-t="btnSend" data-conn disabled></button>
+    </div>
+    <div class="set-row">
+      <label class="set-label"><span data-t="set_ambient"></span></label>
+      <input id="atl-in" type="number" step="1" min="0" data-t-ph="valPh" data-conn disabled>
+      <button type="button" id="btn-atl" data-t="btnSend" data-conn disabled></button>
+    </div>
+    <p class="hint" data-t="comfortHint"></p>
+
+    <h3 class="set-group" data-t="setgrpGeneral"></h3>
+    <div class="set-row">
+      <label class="set-label"><span data-t="modelLabel"></span></label>
+      <select id="model-in"></select>
+      <span></span>
+    </div>
+    <div class="set-row">
+      <label class="set-label"><span data-t="lblCmdPwd"></span></label>
+      <input id="cmd-pwd" type="text" data-t-ph="cmdPwdPh" value="OKAIYLBT">
+      <span></span>
+    </div>
+    <div class="set-row">
+      <label class="set-label"><span data-t="set_svcPwd"></span></label>
+      <input id="svc-pwd" type="text" data-t-ph="svcPwdPh" value="OKAI_CAR" data-conn disabled>
+      <span></span>
+    </div>
+    <div class="set-row">
+      <label class="set-label"><span data-t="set_cmdMode"></span></label>
+      <select id="sel-mode" data-conn disabled>
+        <option value="0" data-t="optModeNormal"></option>
+        <option value="2" data-t="optModeTest"></option>
+      </select>
+      <button type="button" id="btn-mode" data-t="btnSend" data-conn disabled></button>
+    </div>
+    <div class="set-row">
+      <label class="set-label"><span data-t="set_name"></span></label>
+      <input id="name-in" type="text" data-t-ph="namePh" data-conn disabled>
+      <button type="button" id="btn-name" data-t="btnSend" data-conn disabled></button>
+    </div>
+    <div id="settings-body"></div>
+  </div>
+
+  <div class="card" id="raw-card" hidden>
+    <div class="card-head"><h2 data-t="rawTitle"></h2><button type="button" class="help-btn" data-help="raw" aria-label="Info">?</button></div>
+    <p class="hint" data-t="rawHint"></p>
+
+    <h3 class="set-group" data-t="grp_at"></h3>
+    <p class="hint" data-t="opQuickLabel"></p>
+    <div class="btns" id="op-quick"></div>
+    <div class="set-row">
+      <label data-t="lblAtOp"></label>
+      <input id="at-op" type="text" maxlength="5" data-t-ph="atOpPh" data-conn disabled>
+      <input id="at-fields" type="text" data-t-ph="atFieldsPh" data-conn disabled>
+      <button type="button" id="btn-at" data-t="btnAt" data-conn disabled></button>
+    </div>
+
+    <h3 class="set-group" data-t="grp_raw"></h3>
+    <div class="set-row">
+      <label data-t="lblRaw"></label>
+      <input id="raw-in" type="text" data-t-ph="rawPh" data-conn disabled>
+      <button type="button" id="btn-raw" data-t="btnRaw" data-conn disabled></button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 data-t="s6Title"></h2>
+    <div class="log-opts">
+      <div class="log-opt">
+        <span data-t="publicLogLabel"></span>
+        <input type="checkbox" id="public-log" checked>
+        <button type="button" class="help-btn" data-help="publiclog" aria-label="Info">?</button>
+      </div>
+      <div class="log-opt">
+        <span data-t="diagLogLabel"></span>
+        <input type="checkbox" id="diag-log">
+        <button type="button" class="help-btn" data-help="diaglog" aria-label="Info">?</button>
+      </div>
+    </div>
+    <div class="btns">
+      <button type="button" id="btn-copy-log" data-t="btnCopyLog"></button>
+      <button type="button" id="btn-clear-log" data-t="btnClearLog"></button>
+      <button type="button" id="btn-save-log" class="span2" data-t="btnSaveLog"></button>
+    </div>
+    <pre id="log"></pre>
+    <p class="hint"><span class="log-tx" data-t="logTxLegend"></span>, <span class="log-rx" data-t="logRxLegend"></span></p>
+  </div>
+
+  <footer class="foot">
+    <span class="foot-links">
+      <a id="link-guide" href="GUIDE.de.md" data-doc="GUIDE" data-t="footGuide"></a>
+      <a href="https://github.com/Laufbursche42/okai-unlock" target="_blank" rel="noopener" data-t="footSource"></a>
+      <a id="link-readme" href="README.md" data-doc="README" data-t="footReadme"></a>
+      <a id="link-disclaimer" href="#" data-t="footDisclaimer"></a>
+      <a id="link-license" href="LICENSE.de.md" data-doc="LICENSE" data-t="footLicense"></a>
+      <a id="link-privacy" href="PRIVACY.de.md" data-doc="PRIVACY" data-t="footPrivacy"></a>
+      <a id="link-trademarks" href="TRADEMARKS.de.md" data-doc="TRADEMARKS" data-t="footTrademarks"></a>
+    </span>
+    <span class="ver" id="build-ver"></span>
+    <a class="foot-copy" href="https://laufbursche42.github.io/Laufbursche42/" target="_blank" rel="noopener">Copyright (c) 2026 Laufbursche</a>
+  </footer>
+</div>
+
+<dialog id="doc" aria-labelledby="doc-title">
+  <div class="doc-head">
+    <h3 id="doc-title"></h3>
+    <button type="button" id="doc-x">&times;</button>
+  </div>
+  <div class="doc-body" id="doc-body"></div>
+  <div class="doc-foot">
+    <button type="button" id="doc-close" data-t="docClose"></button>
+  </div>
+</dialog>
+
+<dialog id="help" aria-labelledby="help-title">
+  <div class="doc-head">
+    <h3 id="help-title"></h3>
+    <button type="button" id="help-x">&times;</button>
+  </div>
+  <div class="doc-body"><p id="help-body"></p></div>
+  <div class="doc-foot">
+    <button type="button" id="help-close" data-t="docClose"></button>
+  </div>
+</dialog>
+
+<dialog id="confirm" aria-labelledby="confirm-title">
+  <div class="doc-head">
+    <h3 id="confirm-title" data-t="confirmTitle"></h3>
+    <button type="button" id="confirm-x">&times;</button>
+  </div>
+  <div class="doc-body"><p id="confirm-body"></p></div>
+  <div class="doc-foot">
+    <button type="button" id="confirm-no" data-t="confirmCancel"></button>
+    <button type="button" id="confirm-ok" class="primary" data-t="confirmOk"></button>
+  </div>
+</dialog>
+
+<script src="i18n.js?v=1"></script>
+<script src="app.js?v=1"></script>
+</body>
+</html>
