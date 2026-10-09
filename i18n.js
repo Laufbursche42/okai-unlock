@@ -131,7 +131,6 @@ window.I18N = {
     warnUnlock: 'Das hebt die Sperre am Roller auf.',
     warnTestMode: 'Der Testmodus (OKXWM=2) schaltet den Roller in einen Service-Zustand. Nur nutzen, wenn du weißt, was du tust.',
     warnPowerOff: 'Das schaltet den Roller aus. Wieder einschalten geht über diese Seite oder am Roller selbst.',
-    disclaimerText: 'Dieses Werkzeug ist eine Machbarkeitsstudie, kein fertiges Produkt. Es gibt keine Gewährleistung und keine Zusicherung fehlerfreien Betriebs. Das Verändern von Fahrmodus, Sperre oder Service-Zustand kann ein Fahrzeug außerhalb des Zustands bringen, in dem es genehmigt wurde: die ABE erlischt und der Betrieb auf öffentlichen Wegen ist dann nicht erlaubt. Nutze es nur am eigenen Fahrzeug und auf eigenes Risiko. Die Seite spricht nur lokal über Bluetooth mit dem Gerät, es werden keine Daten an einen Server gesendet. OKAI ist eine Marke des jeweiligen Inhabers. Dieses Projekt ist unabhängig und steht in keiner Verbindung zu OKAI oder Yele.',
 
     errNoWebBt: 'Dieser Browser hat kein Web Bluetooth. Nutze Chrome, Edge oder Bluefy (iOS).',
     errNotConnected: 'nicht verbunden',
@@ -285,7 +284,6 @@ window.I18N = {
     warnUnlock: 'This releases the scooter lock.',
     warnTestMode: 'Test mode (OKXWM=2) puts the scooter into a service state. Only use it if you know what you are doing.',
     warnPowerOff: 'This powers the scooter off. Powering it on again works from this page or on the scooter itself.',
-    disclaimerText: 'This tool is a feasibility study, not a finished product. There is no warranty and no guarantee of error-free operation. Changing the drive mode, lock or service state can take a vehicle out of the condition it was approved in: the type approval becomes void and riding on public roads is then not allowed. Use it only on your own vehicle and at your own risk. The page talks to the device locally over Bluetooth only, no data is sent to any server. OKAI is a trademark of its respective owner. This project is independent and not affiliated with OKAI or Yele.',
 
     errNoWebBt: 'This browser has no Web Bluetooth. Use Chrome, Edge or Bluefy (iOS).',
     errNotConnected: 'not connected',
