@@ -20,7 +20,7 @@
  */
 
 // Pre-commit cache-buster auto-bumps BUILD and every ?v= on any web-asset change.
-const BUILD = 'v7';
+const BUILD = 'v8';
 
 // =========================================================================================
 //  VERIFIED PROTOCOL CORE (code-proven from com.yele.app.bleoverseascontrol; self-test at load)
